@@ -1,9 +1,13 @@
 #include "startScene.h"
 #include "gameScene.h"
 #include "EndScene.h"
+#include "audioManager.h"
 //1138, 640
 bool startScene::init()
 {
+	BGMstop = false;
+	audioManager::getIns()->playBGM("sound/bgm_lobby.ogg");
+
 	Sprite* back = Sprite::create("background/2.png");
 	back->setPosition(Vec2(569, 320));
 	back->setScaleX(1.32);
@@ -74,6 +78,12 @@ bool startScene::init()
 	addChild(btn2);
 	btn2->addTouchEventListener(CC_CALLBACK_2(startScene::btnClick2, this));
 
+	Button* btn3 = Button::create("startScene/startBGM.png");
+	btn3->setPosition(Vec2(1093, 605));
+	btn3->setScale(0.8);
+	addChild(btn3);
+	btn3->addTouchEventListener(CC_CALLBACK_2(startScene::btnClick3, this));
+
     return true;
 }
 
@@ -81,6 +91,7 @@ void startScene::btnClick(Ref* ref, Widget::TouchEventType type)
 {
 	Button* btn = (Button*)ref;
 	if (type == Widget::TouchEventType::ENDED) {
+		audioManager::getIns()->stopBGM();
 		gameScene* game = gameScene::create();
 		Director::getInstance()->replaceScene(game);
 	}
@@ -92,6 +103,25 @@ void startScene::btnClick2(Ref* ref, Widget::TouchEventType type)
 	if (type == Widget::TouchEventType::ENDED) {
 		exit(0);
 		return;
+	}
+}
+
+void startScene::btnClick3(Ref* ref, Widget::TouchEventType type)
+{
+	Button* btn = (Button*)ref;
+	if (type == Widget::TouchEventType::ENDED) {
+		if (BGMstop == false) {
+			audioManager::getIns()->setVolume(0);
+			btn->loadTextureNormal("startScene/stopBGM.png");
+			btn->setColor(Color3B::RED);
+			BGMstop = true;
+		}
+		else {
+			audioManager::getIns()->setVolume(1);
+			btn->loadTextureNormal("startScene/startBGM.png");
+			btn->setColor(Color3B::WHITE);
+			BGMstop = false;
+		}
 	}
 }
 

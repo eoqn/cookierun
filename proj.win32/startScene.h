@@ -12,5 +12,8 @@ public:
 
 	void btnClick(Ref* ref, Widget::TouchEventType type);
 	void btnClick2(Ref* ref, Widget::TouchEventType type);
+	void btnClick3(Ref* ref, Widget::TouchEventType type);
+
+	bool BGMstop;
 };
 
