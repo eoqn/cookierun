@@ -16,5 +16,7 @@ public:
 	void stopBGM();
 	float volume;
 	void setVolume(float f);
+	void pauseBGM();
+	void resumeBGM();
 };
 

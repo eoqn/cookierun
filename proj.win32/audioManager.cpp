@@ -39,3 +39,13 @@ void audioManager::setVolume(float f)
     volume = f;
     AudioEngine::setVolume(bgmTag, volume);
 }
+
+void audioManager::pauseBGM()
+{
+    AudioEngine::pause(bgmTag);
+}
+
+void audioManager::resumeBGM()
+{
+    AudioEngine::resume(bgmTag);
+}

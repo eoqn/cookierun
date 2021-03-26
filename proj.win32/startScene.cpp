@@ -54,16 +54,15 @@ bool startScene::init()
 	rankingBoard->setPosition(Vec2(600, 300));
 	addChild(rankingBoard);
 
-	Label* best = Label::createWithTTF("9999", "fonts/SangSangFlowerRoad.otf", 120);
+	Label* best = Label::createWithTTF("9999", "fonts/SangSangFlowerRoad.otf", 50);
 	addChild(best);
 	best->enableOutline(Color4B::BLACK, 1);
-	best->setPosition(Vec2(600, 270));
+	best->setPosition(Vec2(600, 260));
 
-	int high = 0;
-	high = UserDefault::getInstance()->getIntegerForKey("myKey");
-
-	int score = UserDefault::getInstance()->getIntegerForKey("myKey");
-	std::string str = StringUtils::format("%04d", score);
+	int score1 = UserDefault::getInstance()->getIntegerForKey("myKey");
+	int score2 = UserDefault::getInstance()->getIntegerForKey("myKey2");
+	int score3 = UserDefault::getInstance()->getIntegerForKey("myKey3");
+	std::string str = StringUtils::format(" 1À§ : %04d\n2À§ : %04d\n3À§ : %04d", score1, score2, score3);
 	best->setString(str);
 
 	Button* btn = Button::create("startScene/start_btn.png");
